@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    <style>
+      /* CSS styles for the result */
+      #result {
+        font-size: 20px; /* Larger font size */
+        font-weight: bold; /* Bold text */
+        margin-top: 20px; /* Add some space above the result text */
+      }
+      #header-image {
+        max-width: 100%; /* Makes the image responsive */
+        height: auto; /* Maintain aspect ratio */
+        display: block; /* Center the image */
+        margin: 0 auto; /* Center the image */
+      }
+    </style>
+  </head>
+  <body>
+    <img id="header-image" src="https://drive.usercontent.google.com/download?id=15YqFBAcC5Pr2dgVCIECgura0CyPJD-xo&export=view" alt="Alvarado ISD Spear Logo">
+
+    <form id="idForm" onsubmit="submitId(); return false;">
+      <label for="idNumber">Enter your ID number:</label>
+      <input type="text" id="idNumber" name="idNumber">
+      <button type="submit" value="Submit">Submit</button>
+    </form>
+    <div id="result"></div>
+
+    <script>
+      // Function to submit the ID to the server-side GAS function
+      function submitId() {
+        var idNumber = document.getElementById('idNumber').value;
+        google.script.run.withSuccessHandler(function(response) {
+          document.getElementById('result').innerText = "Go to room: " + response;
+        }).getAssociatedValueById(idNumber);
+      }
+    </script>
+  </body>
+</html>
